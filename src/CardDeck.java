@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardDeck {
@@ -6,15 +7,21 @@ public class CardDeck {
     public CardDeck(List<Card> d)
     {
         deck = d;
+        dealt = new ArrayList<>();
     }
     public void shuffle()
     {
-        deck.addAll(dealt);
-        dealt.removeAll(dealt);
+        if(dealt.size() > 0) {
+            deck.addAll(dealt);
+        }
+        while(dealt.size() > 0)
+        {
+            dealt.remove(0);
+        }
         for(int i = 0; i < deck.size(); i++)
         {
-            int rnd1 = getRndInt(0,deck.size());
-            int rnd2 = getRndInt(0,deck.size());
+            int rnd1 = getRndInt(0,deck.size()-1);
+            int rnd2 = getRndInt(0,deck.size()-1);
             Card temp = deck.get(rnd1);
             deck.set(rnd1, deck.get(rnd2));
             deck.set(rnd2, temp);
@@ -41,5 +48,13 @@ public class CardDeck {
     public int getRndInt(int min, int max)
     {
         return (int) Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+    public void show()
+    {
+        for(int i = 0; i < deck.size(); i++)
+        {
+            System.out.print(" | " + deck.get(i).getRank() + " | ");
+        }
+        System.out.println();
     }
 }

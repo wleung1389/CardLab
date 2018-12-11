@@ -2,11 +2,11 @@ public class Card {
     private String rank;
     private int value;
     private String suite;
-    public Card(int v, String s)
+    public Card(int v, String s, String r)
     {
         value = v;
         suite = s;
-        rank = v + " " + s;
+        rank = r + " of " + s;
     }
 
     public String getSuite() {
